@@ -27,9 +27,9 @@ public:
     using callback_type       = function<void(const match_result_type& result)>;
     
     Analyzer(matcher_type &&matcher, callback_type &&callback) :
-        matcher_ (matcher),
-       callback_(callback),
-        printer_ (callback)
+        matcher_ {matcher},
+        callback_{callback},
+        printer_ {callback}
     {}
     
 private:
@@ -43,7 +43,7 @@ private:
         {}
         
     private:
-        callback_type callback_;
+        callback_type& callback_;
         
         virtual void run(const match_result_type &result) override
         {

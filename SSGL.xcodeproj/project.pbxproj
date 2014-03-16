@@ -324,8 +324,9 @@
 			isa = PBXGroup;
 			children = (
 				CCE4A2C118D5F999006B9072 /* SSGL */,
-				CCE4A2C018D5F999006B9072 /* Products */,
+				CCE4A2D218D5FA97006B9072 /* Internal */,
 				CCFE249018D5FCA100D874B8 /* Frameworks */,
+				CCE4A2C018D5F999006B9072 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -345,7 +346,6 @@
 				CCFE248C18D5FBD600D874B8 /* AnalysisBuilder.h */,
 				CCFE248D18D5FBD600D874B8 /* Analyzer.h */,
 				CCFE248E18D5FBD600D874B8 /* Def.h */,
-				CCE4A2D218D5FA97006B9072 /* Internal */,
 			);
 			path = SSGL;
 			sourceTree = "<group>";
@@ -356,6 +356,7 @@
 				CCE4A2C418D5F999006B9072 /* SSGL.1 */,
 			);
 			name = Internal;
+			path = SSGL;
 			sourceTree = "<group>";
 		};
 		CCFE249018D5FCA100D874B8 /* Frameworks */ = {

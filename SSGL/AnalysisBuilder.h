@@ -38,7 +38,7 @@ public:
     
     AnalysisBuilder& operator()(Analyzer &&a)
     {
-        return addAnalyzer(a);
+        return addAnalyzer(a); 
     }
     AnalysisBuilder& operator()(Analyzer &a)
     {
