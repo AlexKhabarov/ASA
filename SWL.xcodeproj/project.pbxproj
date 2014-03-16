@@ -28,6 +28,7 @@
 		CCE4A2AA18D5F954006B9072 /* SWL */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SWL; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCE4A2AD18D5F954006B9072 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		CCE4A2AF18D5F954006B9072 /* SWL.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = SWL.1; sourceTree = "<group>"; };
+		CCFE248F18D5FBF300D874B8 /* $.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = $.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,9 +62,18 @@
 			isa = PBXGroup;
 			children = (
 				CCE4A2AD18D5F954006B9072 /* main.cpp */,
-				CCE4A2AF18D5F954006B9072 /* SWL.1 */,
+				CCFE248F18D5FBF300D874B8 /* $.h */,
+				CCE4A2D118D5FA7F006B9072 /* Internal */,
 			);
 			path = SWL;
+			sourceTree = "<group>";
+		};
+		CCE4A2D118D5FA7F006B9072 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				CCE4A2AF18D5F954006B9072 /* SWL.1 */,
+			);
+			name = Internal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,6 +251,7 @@
 				CCE4A2B518D5F954006B9072 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
