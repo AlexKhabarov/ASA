@@ -46,6 +46,7 @@
 			isa = PBXGroup;
 			children = (
 				CCE4A2AC18D5F954006B9072 /* SWL */,
+				CCE4A2D118D5FA7F006B9072 /* Internal */,
 				CCE4A2AB18D5F954006B9072 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -63,7 +64,6 @@
 			children = (
 				CCE4A2AD18D5F954006B9072 /* main.cpp */,
 				CCFE248F18D5FBF300D874B8 /* $.h */,
-				CCE4A2D118D5FA7F006B9072 /* Internal */,
 			);
 			path = SWL;
 			sourceTree = "<group>";
@@ -74,6 +74,7 @@
 				CCE4A2AF18D5F954006B9072 /* SWL.1 */,
 			);
 			name = Internal;
+			path = SWL;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
