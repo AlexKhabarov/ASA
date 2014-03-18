@@ -237,6 +237,7 @@
 		CCFE25B018D5FD5C00D874B8 /* test_file */ = {isa = PBXFileReference; lastKnownFileType = file; path = test_file; sourceTree = "<group>"; };
 		CCFE25B118D5FD5C00D874B8 /* test_object.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = test_object.py; sourceTree = "<group>"; };
 		CCFE25F818D5FDDB00D874B8 /* input.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = input.cpp; path = ../../../DerivedData/ASA/Build/Products/Debug/input.cpp; sourceTree = "<group>"; };
+		CCFE25F918D6F2DE00D874B8 /* Undef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Undef.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -346,6 +347,7 @@
 				CCFE248C18D5FBD600D874B8 /* AnalysisBuilder.h */,
 				CCFE248D18D5FBD600D874B8 /* Analyzer.h */,
 				CCFE248E18D5FBD600D874B8 /* Def.h */,
+				CCFE25F918D6F2DE00D874B8 /* Undef.h */,
 			);
 			path = SSGL;
 			sourceTree = "<group>";
@@ -589,6 +591,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CCE4A2C818D5F999006B9072 /* Build configuration list for PBXNativeTarget "SSGL" */;
 			buildPhases = (
+				CCFE25FC18D835AF00D874B8 /* ShellScript */,
 				CCE4A2BB18D5F999006B9072 /* Sources */,
 				CCE4A2BC18D5F999006B9072 /* Frameworks */,
 				CCE4A2BD18D5F999006B9072 /* CopyFiles */,
@@ -627,6 +630,22 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CCFE25FC18D835AF00D874B8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "ruby /Users/alexkhabarov/Dropbox/Programming/RubyMine/Dev/apply_undef.rb /Users/alexkhabarov/Dropbox/Programming/Xcode/Workspaces/ASA/Projects/SSGL/SSGL/ ../../SWL/SWL/undef.h";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CCE4A2BB18D5F999006B9072 /* Sources */ = {
@@ -727,6 +746,11 @@
 		CCE4A2C918D5F999006B9072 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/include/,
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Cellar/llvm/3.4/lib,
@@ -738,14 +762,21 @@
 					"-D",
 					__STDC_CONSTANT_MACROS,
 					"-fno-rtti",
+					"-std=c++1y",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = /usr/local/include/;
 			};
 			name = Debug;
 		};
 		CCE4A2CA18D5F999006B9072 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/include/,
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Cellar/llvm/3.4/lib,
@@ -757,8 +788,10 @@
 					"-D",
 					__STDC_CONSTANT_MACROS,
 					"-fno-rtti",
+					"-std=c++1y",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = /usr/local/include/;
 			};
 			name = Release;
 		};

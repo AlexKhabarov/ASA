@@ -10,6 +10,7 @@
 #define SG_AnalysisBuilder_h
 
 #include "Analyzer.h"
+#include "../../SWL/SWL/$.h"
 
 SC_BEGIN
 
@@ -22,7 +23,7 @@ public:
                         options_parser_.getSourcePathList()}
     {}
     
-    AnalysisBuilder& addAnalyzer(Analyzer &a)
+    AnalysisBuilder& addAnalyzer(Analyzer &a) // Add ref() ro def; yay
     {
         addMatcher(a.matcher_, &a.printer_);
         
@@ -55,7 +56,11 @@ private:
     ClangTool tool_;
     int       result_{0};
 };
-    
+
 SC_END
 
 #endif
+
+
+// Automatically generated undef includes: 
+#include "/Users/alexkhabarov/Dropbox/Programming/Xcode/Workspaces/ASA/Projects/SSGL/SSGL/../../SWL/SWL/undef.h"

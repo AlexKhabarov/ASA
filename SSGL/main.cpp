@@ -2,7 +2,7 @@
 #include "Analyzer.h"
 
 // Nodes Dumper
-// if (auto fs = res.Nodes.getNodeAs<clang::ForStmt>("forLoop")) fs->dump()
+// if (auto fs = SC_NODE_NAMED(ForStmt)) fs->dump()
 
 int main(int argc, const char **argv) {
     using namespace SC;
@@ -29,3 +29,7 @@ int main(int argc, const char **argv) {
 // declStmt = int@varName@=@expr@;
 // forStmt  = for@(@declStmt...@;@exprStmt@;@exprStmt@)@{@stmts@}
 // ifStmt   = if@(@exprStmt@)@{@stmts@}
+
+
+// Automatically generated undef includes: 
+#include "/Users/alexkhabarov/Dropbox/Programming/Xcode/Workspaces/ASA/Projects/SSGL/SSGL/../../SWL/SWL/undef.h"
