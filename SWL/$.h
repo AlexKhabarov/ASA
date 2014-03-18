@@ -6,6 +6,141 @@
 //  Copyright (c) 2014 Khabarov Inc. All rights reserved.
 //
 
+#pragma mark Testing
+
+#define $time_label(name) \
+    const auto __internal_$time_label_##name = std::chrono::high_resolution_clock::now();
+#define $time_delta(begin, end) \
+    std::chrono::duration_cast<std::chrono::milliseconds>(__internal_$time_label_##end - __internal_$time_label_##begin)
+
+#pragma mark Functional
+
+#define $def_gen_args(r, data, i, elem) \
+    BOOST_PP_COMMA_IF(i) BOOST_PP_CAT(T, i) elem
+
+#define $def_attributed(code, name, attr, ...) \
+    template<BOOST_PP_ENUM_PARAMS(BOOST_PP_SEQ_SIZE(BOOST_PP_VARIADIC_TO_SEQ(__VA_ARGS__)), class T)> \
+    inline auto name(BOOST_PP_SEQ_FOR_EACH_I($def_gen_args, ~, BOOST_PP_VARIADIC_TO_SEQ(__VA_ARGS__))) attr {return ({code;});}
+
+#define $def(code, name, ...) \
+    $def_attributed(code, name,, __VA_ARGS__)
+
+#define $def_s(code, name) \
+    inline auto name() {return ({code;});}
+
+#define $fun_gen_args(r, data, i, elem) \
+    BOOST_PP_COMMA_IF(i) auto elem
+
+#define $def_local(code, name, ...) \
+    auto name = [&](BOOST_PP_SEQ_FOR_EACH_I($fun_gen_args, ~, BOOST_PP_VARIADIC_TO_SEQ(__VA_ARGS__))) {return ({code;});};
+
+#define $in  $inl
+#define $ex  $exl
+#define $inl const&
+#define $exl &
+#define $inr const&&
+#define $exr &&
+
+#define auto$in  auto $in
+#define auto$ex  auto $ex
+#define auto$inl auto $inl
+#define auto$exl auto $exl
+#define auto$inr auto $inr
+#define auto$exr auro $exr
+
+#define $arguments_enable_postfix_form(unit) \
+    using unit##$in  = unit $in; \
+    using unit##$ex  = unit $ex; \
+    using unit##$inl = unit $inl; \
+    using unit##$exl = unit $exl; \
+    using unit##$inr = unit $inr; \
+    using unit##$exr = unit $exr; \
+
+#define $returning(code) {return ({code;});}
+
+#pragma mark Routines
+
+#define $main int main(int $argc, const char **$argv) 
+
+#define $repeat(times) for (int i = 0; i < times; i++)
+
+#pragma mark Using direcctive
+
+#define $alias(lhs, rhs) \
+    using lhs = rhs; \
+    $arguments_enable_postfix_form(lhs)
+
+#define $typedef_enable_generic_accessor(type) \
+    $alias($class, type) \
+    $alias($self$type, type)
+
+#define $end };
+
+#pragma mark Typing
+
+#define $type(unit) decltype(unit)
+
+#pragma mark OOP
+
+// Definition
+
+#define $obj_inheritance_routine(r, data, i, elem) \
+    BOOST_PP_COMMA_IF(i) public elem
+#define $obj_parent_aliasing_routine(r, data, i, elem) \
+    using BOOST_PP_CAT(parent, i) = elem;
+
+#define $obj(name, ...) \
+    class name : BOOST_PP_SEQ_FOR_EACH_I($obj_inheritance_routine, ~, BOOST_PP_VARIADIC_TO_SEQ(__VA_ARGS__)) { \
+    public: \
+    BOOST_PP_SEQ_FOR_EACH_I($obj_parent_aliasing_routine, ~, BOOST_PP_VARIADIC_TO_SEQ(__VA_ARGS__)) \
+    using parent = parent0; \
+    $typedef_enable_generic_accessor(name)
+
+// Encapsulation
+
+#define $aliasing  public:
+#define $interface public:
+#define $internal  private:
+#define $protected protected:
+
+// Self-access
+
+#define $self     (*this)
+#define $self$ex std::ref($self)
+#define $self$in std::cref($self)
+
+// Constructor
+
+#define $constructor_argument_declaration_(r, data, i, elem)    \
+    BOOST_PP_COMMA_IF(i) decltype(BOOST_PP_CAT(elem, $))$inr elem
+#define $constructor_argument_initialization_(r, data, i, elem) \
+    BOOST_PP_CAT(elem, $) = $send(elem);
+
+#define $constructor(...) \
+    (BOOST_PP_SEQ_FOR_EACH_I($constructor_argument_declaration_,    ~, BOOST_PP_VARIADIC_TO_SEQ(__VA_ARGS__))) \
+    {BOOST_PP_SEQ_FOR_EACH_I($constructor_argument_initialization_, ~, BOOST_PP_VARIADIC_TO_SEQ(__VA_ARGS__))}
+
+#define $constructor_inherit(name) \
+    using name::name;
+
+#define $setter(type, code) \
+    [](type $ex unit, type $exr other) -> type $ex {code; return unit = $send(other);}
+
+#define $getter(type, code) \
+    [](type $ex unit) -> type $ex {code; return unit;}
+
+#define $writeonly(name, value, setter_code) \
+    property<decltype(value), false, true> name{value, $setter(decltype(value), setter_code)}; \
+    $alias(name##$type, decltype(name))
+
+#define $readonly(name, value, getter_code) \
+    property<decltype(value), true, false> name{value, $getter(decltype(value), getter_code)}; \
+    $alias(name##$type, decltype(name))
+
+#define $readwrite(name, value, setter_code, getter_code) \
+    property<decltype(value), true, true> name{value, $setter(decltype(value), setter_code), $getter(decltype(value), getter_code)}; \
+    $alias(name##$type, decltype(name))
+
 #ifndef SWL_$_h
 #define SWL_$_h
 
@@ -34,43 +169,10 @@ using std::operator "" s;
 using std::cout;
 using std::endl;
 using std::string;
-
-#pragma mark Testing
-
-#define $time_label(name) \
-    const auto __internal_$time_label_##name = std::chrono::high_resolution_clock::now();
-#define $time_delta(begin, end) \
-    std::chrono::duration_cast<std::chrono::milliseconds>(__internal_$time_label_##end - __internal_$time_label_##begin)
-
-#pragma mark Functional
-
-#define $def_gen_args(r, data, i, elem) \
-    BOOST_PP_COMMA_IF(i) BOOST_PP_CAT(T, i) elem
-
-#define $def(code, name, ...) \
-    template<BOOST_PP_ENUM_PARAMS(BOOST_PP_SEQ_SIZE(BOOST_PP_VARIADIC_TO_SEQ(__VA_ARGS__)), class T)> \
-    inline auto name(BOOST_PP_SEQ_FOR_EACH_I($def_gen_args, ~, BOOST_PP_VARIADIC_TO_SEQ(__VA_ARGS__))) {return ({code;});}
-
-#define $fun_gen_args(r, data, i, elem) \
-    BOOST_PP_COMMA_IF(i) auto elem
-
-#define $def_local(code, name, ...) \
-    auto name = [&](BOOST_PP_SEQ_FOR_EACH_I($fun_gen_args, ~, BOOST_PP_VARIADIC_TO_SEQ(__VA_ARGS__))) {return ({code;});};
-
-#define $in  $inl
-#define $ex  $exl
-#define $inl const&
-#define $exl &
-#define $inr const&&
-#define $exr &&
-
-#define $arguments_enable_postfix_form(unit) \
-using unit##$in  = unit $in; \
-using unit##$ex  = unit $ex; \
-using unit##$inl = unit $inl; \
-using unit##$exl = unit $exl; \
-using unit##$inr = unit $inr; \
-using unit##$exr = unit $exr; \
+using std::ref;
+using std::move;
+using std::forward;
+using std::function;
 
 $arguments_enable_postfix_form(bool)
 $arguments_enable_postfix_form(char)
@@ -81,40 +183,6 @@ $arguments_enable_postfix_form(float)
 $arguments_enable_postfix_form(double)
 $arguments_enable_postfix_form(wchar_t)
 $arguments_enable_postfix_form(string)
-
-#define $returning(code) {return code;}
-
-#pragma mark Routines
-
-#define $repeat(times) for (int i = 0; i < times; i++)
-
-#pragma mark Using direcctive
-
-#define $alias(lhs, rhs) \
-    using lhs = rhs; \
-    $arguments_enable_postfix_form(lhs)
-
-#define $typedef_enable_generic_accessor(type) \
-    $alias($class, type) \
-    $alias($self$type, type)
-
-#define $end };
-
-#pragma mark Typing
-
-#define $type(unit) decltype(unit)
-
-#pragma mark OOP
-
-#define $self (*this)
-
-// Constructor
-
-#define $constructor_argument_declaration_(r, data, i, elem)    BOOST_PP_COMMA_IF(i) decltype(BOOST_PP_CAT(elem, $))$inr elem
-#define $constructor_argument_initialization_(r, data, i, elem) BOOST_PP_CAT(elem, $) = $send(elem);
-#define $constructor(...) \
-    (BOOST_PP_SEQ_FOR_EACH_I($constructor_argument_declaration_,    ~, BOOST_PP_VARIADIC_TO_SEQ(__VA_ARGS__))) \
-    {BOOST_PP_SEQ_FOR_EACH_I($constructor_argument_initialization_, ~, BOOST_PP_VARIADIC_TO_SEQ(__VA_ARGS__))}
 
 // Property
 
@@ -222,28 +290,10 @@ public:
         $returning(this->getter$(unit$))
 };
 
-#define $setter(type, code) \
-    [](type $ex unit, type $exr other) -> type $ex {code; return unit = $send(other);}
-
-#define $getter(type, code) \
-    [](type $ex unit) -> type $ex {code; return unit;}
-
 template <typename T>
 using readonly  = property<T, true, false>;
 template <typename T>
 using readwrite = property<T, true, true>;
-
-#define $writeonly(name, value, setter_code) \
-    property<decltype(value), false, true> name{value, $setter(decltype(value), setter_code)}; \
-    $alias(name##$type, decltype(name))
-
-#define $readonly(name, value, getter_code) \
-    property<decltype(value), true, false> name{value, $getter(decltype(value), getter_code)}; \
-    $alias(name##$type, decltype(name))
-
-#define $readwrite(name, value, setter_code, getter_code) \
-    property<decltype(value), true, true> name{value, $setter(decltype(value), setter_code), $getter(decltype(value), getter_code)}; \
-    $alias(name##$type, decltype(name))
 
 } // namespace $
     
