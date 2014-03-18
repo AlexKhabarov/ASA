@@ -1,27 +1,29 @@
-#include "AnalysisBuilder.h"
-#include "Analyzer.h"
+#include "analysis_builder.h"
+
+#include "../../SWL/SWL/$.h"
 
 // Nodes Dumper
-// if (auto fs = SC_NODE_NAMED(ForStmt)) fs->dump()
+// if (auto fs = $sl$node(ForStmt)) fs->dump()
 
-int main(int argc, const char **argv) {
-    using namespace SC;
+$main
+{
+    using namespace ssgl;
     
-    AnalysisBuilder{argc, argv}
-        SC_ANALYZER
+    analysis::builder{$argc, $argv}
+        $sl$analyzer
         (
-            declStmt(),
-            SC_OUT << "declaration\n"
+             declStmt(),
+             outs() << "declaration\n"
         )
-        SC_ANALYZER
+        $sl$analyzer
         (
-             forStmt(hasLoopInit(declStmt(hasSingleDecl(varDecl(hasInitializer(integerLiteral(equals(0)))))))) SC_BIND(ForStmt),
-             SC_OUT << "got for (int i = 0; ...; ...) ... " << SC_NODE_NAMED(ForStmt) << "\n"
+             forStmt(hasLoopInit(declStmt(hasSingleDecl(varDecl(hasInitializer(integerLiteral(equals(0)))))))) $sl$bind(ForStmt),
+             outs() << "got for (int i = 0; ...; ...) ... " << $sl$node(ForStmt) << "\n"
         )
-        SC_ANALYZER
+        $sl$analyzer
         (
              breakStmt(),
-             SC_OUT << "got break statement\n"
+             outs() << "got break statement\n"
         )
     ();
 }
@@ -29,7 +31,6 @@ int main(int argc, const char **argv) {
 // declStmt = int@varName@=@expr@;
 // forStmt  = for@(@declStmt...@;@exprStmt@;@exprStmt@)@{@stmts@}
 // ifStmt   = if@(@exprStmt@)@{@stmts@}
-
 
 // Automatically generated undef includes: 
 #include "/Users/alexkhabarov/Dropbox/Programming/Xcode/Workspaces/ASA/Projects/SSGL/SSGL/../../SWL/SWL/undef.h"

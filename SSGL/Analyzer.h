@@ -6,80 +6,78 @@
 //  Copyright (c) 2014 Heaven Inc. All rights reserved.
 //
 
-#ifndef SG_Analyzer_h
-#define SG_Analyzer_h
+#ifndef SGGL_Analyzer_h
+#define SGGL_Analyzer_h
 
-#include "Def.h"
-#include <functional>
+#include "def.h"
+#include "../../SWL/SWL/$.h"
 
-SC_BEGIN
+SSGL_BEGIN
 
-using std::function;
+namespace analysis {
 
-class Analyzer
-{
-    friend class AnalysisBuilder;
+$obj(analyzer, base_i)
+$interface
+    friend class builder;
+
+    $alias(matcher_type,        StatementMatcher)
+    $alias(match_callback_type, MatchFinder::MatchCallback)
+    $alias(match_result_type,   MatchFinder::MatchResult)
+    $alias(callback_type,       function<void(match_result_type$in)>)
+
+    $obj(printer_type, match_callback_type)
+        printer_type(callback_type$in callback) :
+            callback_{callback}
+        {}
+
+    $internal
+        callback_type$in callback_;
+
+        void run(match_result_type$in result) override
+        {
+            callback_(result);
+        }
+    $end
     
-public:
-    using matcher_type        = ast_matchers::StatementMatcher;
-    using match_callback_type = ast_matchers::MatchFinder::MatchCallback;
-    using match_result_type   = ast_matchers::MatchFinder::MatchResult;
-    using callback_type       = function<void(const match_result_type& result)>;
-    
-    Analyzer(matcher_type &&matcher, callback_type &&callback) :
+    analyzer(matcher_type$in matcher, callback_type$in callback) :
         matcher_ {matcher},
         callback_{callback},
         printer_ {callback}
     {}
     
-private:
-    matcher_type matcher_;
+$internal
+    matcher_type  matcher_;
     callback_type callback_;
-    class printer_type : public match_callback_type
-    {
-    public:
-        printer_type(callback_type &callback) :
-            callback_(callback)
-        {}
-        
-    private:
-        callback_type& callback_;
-        
-        virtual void run(const match_result_type &result) override
-        {
-            callback_(result);
-        }
-    };
-    
-    printer_type printer_;
-};
+    printer_type  printer_;
+$end
 
-#define SC_ANALYZER(matcher_code, callback_code)        \
-    (                                                   \
-        Analyzer                                        \
-        {                                               \
-            matcher_code,                               \
-                                                        \
-            [&](const Analyzer::match_result_type& res) \
-            {                                           \
-                callback_code;                          \
-            }                                           \
-        }                                               \
+} // namespace analysis
+
+SSGL_END
+
+#define $sl$analyzer(matcher_code, callback_code)                   \
+    (                                                               \
+        ssgl::analysis::analyzer                                    \
+        {                                                           \
+            matcher_code,                                           \
+                                                                    \
+            [&](ssgl::analysis::analyzer::match_result_type$in res) \
+            {                                                       \
+                callback_code;                                      \
+            }                                                       \
+        }                                                           \
     )
 
-#define SC_NAME(name)                                        (#name)
-#define SC_BIND(name)       .bind                     SC_NAME( name)
-#define SC_NODE_NAMED(name) res.Nodes.getNodeAs<name> SC_NAME( name)
-#define SC_DECL_NAMED(name) res.Nodes.getDeclAs<name> SC_NAME( name)
-#define SC_STMT_NAMED(name) res.Nodes.getStmtAs<name> SC_NAME( name)
-#define SC_CONTEXT          res.Context
+#define $sl$name(name)                                   (#name)
+#define $sl$bind(name) .bind                     $sl$name( name)
+#define $sl$node(name) res.Nodes.getNodeAs<name> $sl$name( name)
+#define $sl$decl(name) res.Nodes.getDeclAs<name> $sl$name( name)
+#define $sl$stmt(name) res.Nodes.getStmtAs<name> $sl$name( name)
+#define $sl$context    res.Context
 
-#define SC_OUT              llvm::outs()
-
-SC_END
 
 #endif
 
 
-// Automatically generated undef includes: 
+// Automatically generated undef includes:
 #include "/Users/alexkhabarov/Dropbox/Programming/Xcode/Workspaces/ASA/Projects/SSGL/SSGL/../../SWL/SWL/undef.h"

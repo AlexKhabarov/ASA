@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Heaven Inc. All rights reserved.
 //
 
-#ifndef SG_Def_h
-#define SG_Def_h
+#ifndef SGGL_def_h
+#define SGGL_def_h
 
 #ifdef __clang__
 #   pragma clang diagnostic push
@@ -25,17 +25,22 @@
 #   pragma clang diagnostic pop
 #endif
 
-#define SC_BEGIN namespace SC {
-#define SC_END   }
+#define SSGL_BEGIN namespace ssgl {
+#define SSGL_END   }
 
-SC_BEGIN
+#include "../../SWL/SWL/$.h"
+
+SSGL_BEGIN
+
+class base_i {};
 
 using namespace llvm;
 using namespace clang;
 using namespace clang::ast_matchers;
 using namespace clang::tooling;
+using namespace $;
 
-SC_END
+SSGL_END
 
 #endif
 

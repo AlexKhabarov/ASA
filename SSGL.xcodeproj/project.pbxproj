@@ -98,9 +98,9 @@
 		CCE4A2BF18D5F999006B9072 /* SSGL */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SSGL; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCE4A2C218D5F999006B9072 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		CCE4A2C418D5F999006B9072 /* SSGL.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = SSGL.1; sourceTree = "<group>"; };
-		CCFE248C18D5FBD600D874B8 /* AnalysisBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalysisBuilder.h; sourceTree = "<group>"; };
-		CCFE248D18D5FBD600D874B8 /* Analyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Analyzer.h; sourceTree = "<group>"; };
-		CCFE248E18D5FBD600D874B8 /* Def.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Def.h; sourceTree = "<group>"; };
+		CCFE248C18D5FBD600D874B8 /* analysis_builder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = analysis_builder.h; sourceTree = "<group>"; };
+		CCFE248D18D5FBD600D874B8 /* analyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = analyzer.h; sourceTree = "<group>"; };
+		CCFE248E18D5FBD600D874B8 /* def.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = def.h; sourceTree = "<group>"; };
 		CCFE252318D5FD5C00D874B8 /* BugpointPasses.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = BugpointPasses.dylib; sourceTree = "<group>"; };
 		CCFE252718D5FD5C00D874B8 /* __wmmintrin_aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = __wmmintrin_aes.h; sourceTree = "<group>"; };
 		CCFE252818D5FD5C00D874B8 /* __wmmintrin_pclmul.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = __wmmintrin_pclmul.h; sourceTree = "<group>"; };
@@ -237,7 +237,6 @@
 		CCFE25B018D5FD5C00D874B8 /* test_file */ = {isa = PBXFileReference; lastKnownFileType = file; path = test_file; sourceTree = "<group>"; };
 		CCFE25B118D5FD5C00D874B8 /* test_object.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = test_object.py; sourceTree = "<group>"; };
 		CCFE25F818D5FDDB00D874B8 /* input.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = input.cpp; path = ../../../DerivedData/ASA/Build/Products/Debug/input.cpp; sourceTree = "<group>"; };
-		CCFE25F918D6F2DE00D874B8 /* Undef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Undef.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -344,10 +343,9 @@
 			children = (
 				CCE4A2C218D5F999006B9072 /* main.cpp */,
 				CCFE25F818D5FDDB00D874B8 /* input.cpp */,
-				CCFE248C18D5FBD600D874B8 /* AnalysisBuilder.h */,
-				CCFE248D18D5FBD600D874B8 /* Analyzer.h */,
-				CCFE248E18D5FBD600D874B8 /* Def.h */,
-				CCFE25F918D6F2DE00D874B8 /* Undef.h */,
+				CCFE248C18D5FBD600D874B8 /* analysis_builder.h */,
+				CCFE248D18D5FBD600D874B8 /* analyzer.h */,
+				CCFE248E18D5FBD600D874B8 /* def.h */,
 			);
 			path = SSGL;
 			sourceTree = "<group>";
