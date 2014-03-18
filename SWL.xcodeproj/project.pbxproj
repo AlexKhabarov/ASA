@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CCE4A2AE18D5F954006B9072 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE4A2AD18D5F954006B9072 /* main.cpp */; };
+		CCE4A2AE18D5F954006B9072 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCE4A2AD18D5F954006B9072 /* test.cpp */; };
 		CCE4A2B018D5F954006B9072 /* SWL.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CCE4A2AF18D5F954006B9072 /* SWL.1 */; };
 /* End PBXBuildFile section */
 
@@ -26,9 +26,10 @@
 
 /* Begin PBXFileReference section */
 		CCE4A2AA18D5F954006B9072 /* SWL */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SWL; sourceTree = BUILT_PRODUCTS_DIR; };
-		CCE4A2AD18D5F954006B9072 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		CCE4A2AD18D5F954006B9072 /* test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
 		CCE4A2AF18D5F954006B9072 /* SWL.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = SWL.1; sourceTree = "<group>"; };
 		CCFE248F18D5FBF300D874B8 /* $.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = $.h; sourceTree = "<group>"; };
+		CCFE25FB18D6FA4800D874B8 /* undef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = undef.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,8 +63,9 @@
 		CCE4A2AC18D5F954006B9072 /* SWL */ = {
 			isa = PBXGroup;
 			children = (
-				CCE4A2AD18D5F954006B9072 /* main.cpp */,
+				CCE4A2AD18D5F954006B9072 /* test.cpp */,
 				CCFE248F18D5FBF300D874B8 /* $.h */,
+				CCFE25FB18D6FA4800D874B8 /* undef.h */,
 			);
 			path = SWL;
 			sourceTree = "<group>";
@@ -84,6 +86,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CCE4A2B318D5F954006B9072 /* Build configuration list for PBXNativeTarget "SWL" */;
 			buildPhases = (
+				CCFE25FA18D6F9E400D874B8 /* ShellScript */,
 				CCE4A2A618D5F954006B9072 /* Sources */,
 				CCE4A2A718D5F954006B9072 /* Frameworks */,
 				CCE4A2A818D5F954006B9072 /* CopyFiles */,
@@ -123,12 +126,28 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		CCFE25FA18D6F9E400D874B8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "ruby /Users/alexkhabarov/Dropbox/Programming/RubyMine/Dev/gen_undef.rb /Users/alexkhabarov/Dropbox/Programming/Xcode/Workspaces/ASA/Projects/SWL/SWL/ $.h undef.h";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CCE4A2A618D5F954006B9072 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CCE4A2AE18D5F954006B9072 /* main.cpp in Sources */,
+				CCE4A2AE18D5F954006B9072 /* test.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,6 +241,12 @@
 		CCE4A2B418D5F954006B9072 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_OPTIMIZATION_LEVEL = 0;
+				LLVM_LTO = YES;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-std=c++1y",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -229,6 +254,12 @@
 		CCE4A2B518D5F954006B9072 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_OPTIMIZATION_LEVEL = s;
+				LLVM_LTO = YES;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-std=c++1y",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
