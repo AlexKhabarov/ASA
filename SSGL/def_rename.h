@@ -20,6 +20,7 @@
 #include "clang/Tooling/Tooling.h"
 #include "clang/ASTMatchers/ASTMatchers.h"
 #include "clang/ASTMatchers/ASTMatchFinder.h"
+#include "clang/Frontend/CompilerInstance.h"
 
 #ifdef __clang__
 #   pragma clang diagnostic pop

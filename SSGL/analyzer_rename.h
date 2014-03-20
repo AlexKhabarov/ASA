@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Heaven Inc. All rights reserved.
 //
 
-#ifndef SGGL_Analyzer_h
-#define SGGL_Analyzer_h
+#ifndef SGGL_analyzer_h
+#define SGGL_analyzer_h
 
 #include "def.h"
 #include "../../SWL/SWL/$.h"
@@ -55,7 +55,7 @@ $end
 
 SSGL_END
 
-#define $sl$analyzer(matcher_code, callback_code)                   \
+#define $sl$analyzer$basic(matcher_code, ...)                       \
     (                                                               \
         ssgl::analysis::analyzer                                    \
         {                                                           \
@@ -63,7 +63,7 @@ SSGL_END
                                                                     \
             [&](ssgl::analysis::analyzer::match_result_type$in res) \
             {                                                       \
-                callback_code;                                      \
+                __VA_ARGS__;                                        \
             }                                                       \
         }                                                           \
     )
@@ -74,7 +74,6 @@ SSGL_END
 #define $sl$decl(name) res.Nodes.getDeclAs<name> $sl$name( name)
 #define $sl$stmt(name) res.Nodes.getStmtAs<name> $sl$name( name)
 #define $sl$context    res.Context
-
 
 #endif
 

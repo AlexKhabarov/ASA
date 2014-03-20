@@ -100,8 +100,8 @@
 		CCE4A2C218D5F999006B9072 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		CCE4A2C418D5F999006B9072 /* SSGL.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = SSGL.1; sourceTree = "<group>"; };
 		CCFE248C18D5FBD600D874B8 /* analysis_builder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = analysis_builder.h; sourceTree = "<group>"; };
-		CCFE248D18D5FBD600D874B8 /* analyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = analyzer.h; sourceTree = "<group>"; };
-		CCFE248E18D5FBD600D874B8 /* def.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = def.h; sourceTree = "<group>"; };
+		CCFE248D18D5FBD600D874B8 /* analyzer_rename.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = analyzer_rename.h; sourceTree = "<group>"; };
+		CCFE248E18D5FBD600D874B8 /* def_rename.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = def_rename.h; sourceTree = "<group>"; };
 		CCFE252318D5FD5C00D874B8 /* BugpointPasses.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = BugpointPasses.dylib; sourceTree = "<group>"; };
 		CCFE252718D5FD5C00D874B8 /* __wmmintrin_aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = __wmmintrin_aes.h; sourceTree = "<group>"; };
 		CCFE252818D5FD5C00D874B8 /* __wmmintrin_pclmul.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = __wmmintrin_pclmul.h; sourceTree = "<group>"; };
@@ -345,9 +345,9 @@
 				CCE4A2C218D5F999006B9072 /* main.cpp */,
 				CCFE25F818D5FDDB00D874B8 /* input.cpp */,
 				CCFE248C18D5FBD600D874B8 /* analysis_builder.h */,
-				CCFE248D18D5FBD600D874B8 /* analyzer.h */,
+				CCFE248D18D5FBD600D874B8 /* analyzer_rename.h */,
 				CC7ABEB318DAF538009D747A /* relation_retriever.h */,
-				CCFE248E18D5FBD600D874B8 /* def.h */,
+				CCFE248E18D5FBD600D874B8 /* def_rename.h */,
 			);
 			path = SSGL;
 			sourceTree = "<group>";
