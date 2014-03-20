@@ -20,17 +20,42 @@ $obj(hell, sin)
         $def(a + b, add, $in a, $in b)
 $end
 
+#define $va_each(args, code) \
+    [](auto...){}(([&](auto&& $arg){code;}(args), 0)...);
+
+namespace std {
+    auto to_string(const char* s)
+    {
+        return std::string(s);
+    }
+    auto to_string(std::string $in s)
+    {
+        return s;
+    }
+}
+
 int main()
 {
-    $def_local(a + b, ladd, $in a, $in b)
+    // $def_local(a + b, ladd, $in a, $in b)
     
     using namespace $;
     
-    auto str = "pizza"s;
+    /*using std::to_string;
+
+    cout << [](auto... args) // Polymorphic Variadic Lambda-Functions, yeah
+    {
+        
+        auto str = "|"s;
+        $va_each(args, str += to_string($arg) + "|"s)
+        return str;
+        
+    }("ss"s, 1.99, "pizza", M_PI);
     
-    cout << str + " yeah!";
+    //std::cout << x(5);
     
-    cout << ladd(55.1, 6);
+    //auto m = $map("pizza", 1)("google", 2);
+    
+    cout << "\n" << ladd(55.1, 6);*/
 }
 
 #include "undef.h"

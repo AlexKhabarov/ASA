@@ -20,10 +20,10 @@
 
 #define $def_attributed(code, name, attr, ...) \
     template<BOOST_PP_ENUM_PARAMS(BOOST_PP_SEQ_SIZE(BOOST_PP_VARIADIC_TO_SEQ(__VA_ARGS__)), class T)> \
-    inline auto name(BOOST_PP_SEQ_FOR_EACH_I($def_gen_args, ~, BOOST_PP_VARIADIC_TO_SEQ(__VA_ARGS__))) attr {return ({code;});}
+    inline auto name(BOOST_PP_SEQ_FOR_EACH_I($def_gen_args, ~, BOOST_PP_VARIADIC_TO_SEQ(__VA_ARGS__))) attr {code;}
 
 #define $def(code, name, ...) \
-    $def_attributed(code, name,, __VA_ARGS__)
+    $def_attributed(return ({code;}), name,, __VA_ARGS__)
 
 #define $def_s(code, name) \
     inline auto name() {return ({code;});}
@@ -46,7 +46,7 @@
 #define auto$inl auto $inl
 #define auto$exl auto $exl
 #define auto$inr auto $inr
-#define auto$exr auro $exr
+#define auto$exr auto $exr
 
 #define $arguments_enable_postfix_form(unit) \
     using unit##$in  = unit $in; \
@@ -56,7 +56,7 @@
     using unit##$inr = unit $inr; \
     using unit##$exr = unit $exr; \
 
-#define $returning(code) {return ({code;});}
+#define $returning(code) {return code;}
 
 #pragma mark Routines
 
@@ -87,14 +87,17 @@
 #define $obj_inheritance_routine(r, data, i, elem) \
     BOOST_PP_COMMA_IF(i) public elem
 #define $obj_parent_aliasing_routine(r, data, i, elem) \
-    using BOOST_PP_CAT(parent, i) = elem;
+    $alias(BOOST_PP_CAT(parent, i), elem)
 
 #define $obj(name, ...) \
     class name : BOOST_PP_SEQ_FOR_EACH_I($obj_inheritance_routine, ~, BOOST_PP_VARIADIC_TO_SEQ(__VA_ARGS__)) { \
     public: \
-    BOOST_PP_SEQ_FOR_EACH_I($obj_parent_aliasing_routine, ~, BOOST_PP_VARIADIC_TO_SEQ(__VA_ARGS__)) \
-    using parent = parent0; \
-    $typedef_enable_generic_accessor(name)
+        BOOST_PP_SEQ_FOR_EACH_I($obj_parent_aliasing_routine, ~, BOOST_PP_VARIADIC_TO_SEQ(__VA_ARGS__)) \
+        $alias(parent, parent0) \
+        $typedef_enable_generic_accessor(name) \
+        $arguments_enable_postfix_form(name) \
+        \
+        $def_s(#name, static $name) \
 
 // Encapsulation
 
@@ -152,7 +155,7 @@
 #include <boost/preprocessor/seq/size.hpp>
 #include <boost/preprocessor/variadic/to_seq.hpp>
 #include <boost/preprocessor/enum_params.hpp>
-
+#include <boost/assign/list_inserter.hpp>
 #include <boost/type_traits.hpp>
 #include <boost/utility/identity_type.hpp>
 
@@ -163,6 +166,8 @@
 #include <string>
 #include <chrono>
 
+#include <map>
+
 namespace $ {
 
 using std::operator "" s;
@@ -170,9 +175,13 @@ using std::cout;
 using std::endl;
 using std::string;
 using std::ref;
+using std::cref;
 using std::move;
 using std::forward;
 using std::function;
+    
+using std::map;
+using namespace boost::assign;
 
 $arguments_enable_postfix_form(bool)
 $arguments_enable_postfix_form(char)
