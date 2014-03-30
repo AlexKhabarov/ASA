@@ -96,6 +96,9 @@
 
 /* Begin PBXFileReference section */
 		CC7ABEB318DAF538009D747A /* relation_retriever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = relation_retriever.h; sourceTree = "<group>"; };
+		CCC844E418E35A1E003EA946 /* apply_undef.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = apply_undef.rb; sourceTree = "<group>"; };
+		CCC844E518E35A1E003EA946 /* gen_relations.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = gen_relations.rb; sourceTree = "<group>"; };
+		CCC844E618E35D44003EA946 /* relations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = relations.h; sourceTree = "<group>"; };
 		CCE4A2BF18D5F999006B9072 /* SSGL */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SSGL; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCE4A2C218D5F999006B9072 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		CCE4A2C418D5F999006B9072 /* SSGL.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = SSGL.1; sourceTree = "<group>"; };
@@ -347,7 +350,10 @@
 				CCFE248C18D5FBD600D874B8 /* analysis_builder.h */,
 				CCFE248D18D5FBD600D874B8 /* analyzer.h */,
 				CC7ABEB318DAF538009D747A /* relation_retriever.h */,
+				CCC844E618E35D44003EA946 /* relations.h */,
 				CCFE248E18D5FBD600D874B8 /* def.h */,
+				CCC844E418E35A1E003EA946 /* apply_undef.rb */,
+				CCC844E518E35A1E003EA946 /* gen_relations.rb */,
 			);
 			path = SSGL;
 			sourceTree = "<group>";
@@ -643,7 +649,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ruby /Users/alexkhabarov/Dropbox/Programming/RubyMine/Dev/apply_undef.rb /Users/alexkhabarov/Dropbox/Programming/Xcode/Workspaces/ASA/Projects/SSGL/SSGL/ ../../SWL/SWL/undef.h";
+			shellScript = "ruby $SRCROOT/SSGL/apply_undef.rb $SRCROOT/SSGL/ ../../SWL/SWL/undef.h";
 		};
 /* End PBXShellScriptBuildPhase section */
 

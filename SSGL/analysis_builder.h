@@ -17,7 +17,7 @@ SSGL_BEGIN
 
 namespace analysis {
 
-$obj(builder, MatchFinder, base_i)
+$obj(builder, MatchFinder, base_i) // TODO: Add multiple files support
 $interface
     CompilerInstance    compiler_;
     CommonOptionsParser options_parser_;
@@ -26,13 +26,14 @@ $interface
     relation_retriever  retriever_;
     
     builder(int$ex argc, char const** argv) :
-        compiler_      {},
         options_parser_{argc, argv},
         tool_          {options_parser_.getCompilations(),
                         options_parser_.getSourcePathList()},
         retriever_     {({
                         compiler_.createDiagnostics();
-                        compiler_.createSourceManager(tool_.getFiles());
+                        compiler_.setFileManager     (&tool_.getFiles());
+                        compiler_.createSourceManager( tool_.getFiles());
+                        compiler_.InitializeSourceManager(FrontendInputFile(options_parser_.getSourcePathList()[0], IK_PreprocessedCXX));
                         ref(compiler_.getSourceManager());
                        })}
     {}

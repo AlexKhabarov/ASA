@@ -68,6 +68,17 @@ SSGL_END
         }                                                           \
     )
 
+#define $sl$relation(begin, end) \
+    ( \
+        relation_retriever::relation{begin, end, $builder.retriever_.source_manager_} \
+    )
+
+#define $sl$analyzer(name, type, ...) \
+    $sl$analyzer$basic(name()$sl$bind(type), \
+        if (auto n = $sl$node(type)) \
+            push_back($builder.retriever_[#type])(list_of __VA_ARGS__); \
+    )
+
 #define $sl$name(name)                                   (#name)
 #define $sl$bind(name) .bind                     $sl$name( name)
 #define $sl$node(name) res.Nodes.getNodeAs<name> $sl$name( name)
@@ -78,5 +89,6 @@ SSGL_END
 #endif
 
 
-// Automatically generated undef includes:
+
+// Automatically generated undef includes: 
 #include "/Users/alexkhabarov/Dropbox/Programming/Xcode/Workspaces/ASA/Projects/SSGL/SSGL/../../SWL/SWL/undef.h"

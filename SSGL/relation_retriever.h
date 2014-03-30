@@ -12,11 +12,12 @@
 #include "def.h"
 #include "../../SWL/SWL/$.h"
 
-#define $sl$loc(name) ->get##name##Loc()
-#define $sl$loc$start ->getLocStart()
-#define $sl$loc$end   ->getLocEnd()
-
 SSGL_BEGIN
+
+auto stmt2str = [](auto start, auto end, auto compiler){
+    auto sm = compiler->getSourceManager();
+    return std::string{sm->getCharacterData(start), static_cast<unsigned>(std::distance(sm->getCharacterData(start), sm->getCharacterData(clang::Lexer::getLocForEndOfToken(end, 0, sm, compiler->getLangOpts()))))};
+};
 
 $obj(relation_retriever, base_i)
 $interface
@@ -24,28 +25,26 @@ $interface
     $interface
         relation(SourceLocation $in begin, SourceLocation $in end, SourceManager $in source_manager) :
             range_{begin, end},
-            distance_{source_manager.getFileOffset(end) - source_manager.getFileOffset(begin)}
+            text_{source_manager.getCharacterData(begin),
+                  static_cast<unsigned>(std::distance(source_manager.getCharacterData(begin), source_manager.getCharacterData(end)))} // TODO: Optimize
         {}
 
         $def_s(cref(range_),    range)
-        $def_s(cref(distance_), distance)
 
     $internal
         SourceRange range_;
-        unsigned    distance_;
+        string      text_;
     $end
 
     explicit relation_retriever(SourceManager $in sm) : source_manager_{sm} {}
+    ~relation_retriever() {}
 
     auto$ex operator[] (string$in val)
         $returning(data_[val])
 
 // $internal
     SourceManager $in                  source_manager_;
-    map<string, map<string, relation>> data_;
-    // data["ForStmt"]["LParen-Init"] = relation_retriever::relation{lparenloc, initloc, $builder.compiler_.getSourceManager()}; data["ForStmt"]["Ex-Start"] "Start-LParen";
-    // ForStmt: Start LParen Init# Cond# Inc# RParen Body# End
-    // ((\\w\\s?):\\s?(\\w\\s?)+)
+    map<string, std::vector<std::vector<relation>>> data_;
 $end
 
 SSGL_END
