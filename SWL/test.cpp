@@ -24,7 +24,7 @@ $end
     [](auto...){}(([&](auto&& $arg){code;}(args), 0)...);
 
 namespace std {
-    auto to_string(const char* s)
+    auto to_string(char const* s)
     {
         return std::string(s);
     }
@@ -34,13 +34,13 @@ namespace std {
     }
 }
 
+$def(for (int i = 0; i < 100; i++) a += 2; a + b, pizza, $in a, $in b)
+
 int main()
 {
-    // $def_local(a + b, ladd, $in a, $in b)
-    
     using namespace $;
     
-    /*using std::to_string;
+    using std::to_string;
 
     cout << [](auto... args) // Polymorphic Variadic Lambda-Functions, yeah
     {
@@ -55,7 +55,7 @@ int main()
     
     //auto m = $map("pizza", 1)("google", 2);
     
-    cout << "\n" << ladd(55.1, 6);*/
+    //cout << "\n" << ladd(55.1, 6);
 }
 
 #include "undef.h"

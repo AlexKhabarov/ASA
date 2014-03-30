@@ -150,12 +150,15 @@
 #define BOOST_PP_VARIADICS
 
 #include <boost/preprocessor/seq/for_each_i.hpp>
+#include <boost/preprocessor/seq/for_each.hpp>
 #include <boost/preprocessor/tuple/size.hpp>
 #include <boost/preprocessor/tuple/to_seq.hpp>
 #include <boost/preprocessor/seq/size.hpp>
 #include <boost/preprocessor/variadic/to_seq.hpp>
 #include <boost/preprocessor/enum_params.hpp>
+#include <boost/assign/std/vector.hpp>
 #include <boost/assign/list_inserter.hpp>
+#include <boost/assign/list_of.hpp>
 #include <boost/type_traits.hpp>
 #include <boost/utility/identity_type.hpp>
 

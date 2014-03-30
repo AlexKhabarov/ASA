@@ -25,6 +25,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CCC8304418E3FD9600FBB080 /* gen_undef.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = gen_undef.rb; sourceTree = "<group>"; };
 		CCE4A2AA18D5F954006B9072 /* SWL */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SWL; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCE4A2AD18D5F954006B9072 /* test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
 		CCE4A2AF18D5F954006B9072 /* SWL.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = SWL.1; sourceTree = "<group>"; };
@@ -66,6 +67,7 @@
 				CCE4A2AD18D5F954006B9072 /* test.cpp */,
 				CCFE248F18D5FBF300D874B8 /* $.h */,
 				CCFE25FB18D6FA4800D874B8 /* undef.h */,
+				CCC8304418E3FD9600FBB080 /* gen_undef.rb */,
 			);
 			path = SWL;
 			sourceTree = "<group>";
@@ -138,7 +140,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ruby /Users/alexkhabarov/Dropbox/Programming/RubyMine/Dev/gen_undef.rb /Users/alexkhabarov/Dropbox/Programming/Xcode/Workspaces/ASA/Projects/SWL/SWL/ $.h undef.h SWL_\\$_h";
+			shellScript = "ruby $SRCROOT/SWL/gen_undef.rb $SRCROOT/SWL/ $.h undef.h SWL_\\$_h";
 		};
 /* End PBXShellScriptBuildPhase section */
 
