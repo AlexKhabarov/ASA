@@ -14,19 +14,19 @@
 
 SSGL_BEGIN
 
-auto stmt2str = [](auto start, auto end, auto compiler){
-    auto sm = compiler->getSourceManager();
-    return std::string{sm->getCharacterData(start), static_cast<unsigned>(std::distance(sm->getCharacterData(start), sm->getCharacterData(clang::Lexer::getLocForEndOfToken(end, 0, sm, compiler->getLangOpts()))))};
+auto stmt2str = [](auto start, auto end, auto$in compiler, bool forced_advance = false){
+    auto$in sm = compiler.getSourceManager();
+    auto    true_start = forced_advance? clang::Lexer::getLocForEndOfToken(start, 0, sm, compiler.getLangOpts()) : start;
+    return std::string{sm.getCharacterData(true_start), static_cast<unsigned>(std::distance(sm.getCharacterData(true_start), sm.getCharacterData(end)))};
 };
 
 $obj(relation_retriever, base_i)
 $interface
     $obj(relation, base_i)
     $interface
-        relation(SourceLocation $in begin, SourceLocation $in end, SourceManager $in source_manager) :
+        relation(SourceLocation $in begin, SourceLocation $in end, CompilerInstance $in compiler, bool forced_advance = false) :
             range_{begin, end},
-            text_{source_manager.getCharacterData(begin),
-                  static_cast<unsigned>(std::distance(source_manager.getCharacterData(begin), source_manager.getCharacterData(end)))} // TODO: Optimize
+            text_{stmt2str(begin, end, compiler, forced_advance)} // TODO: Optimize
         {}
 
         $def_s(cref(range_),    range)
@@ -36,14 +36,14 @@ $interface
         string      text_;
     $end
 
-    explicit relation_retriever(SourceManager $in sm) : source_manager_{sm} {}
+    explicit relation_retriever(CompilerInstance $in sm) : compiler_{sm} {}
     ~relation_retriever() {}
 
     auto$ex operator[] (string$in val)
         $returning(data_[val])
 
 // $internal
-    SourceManager $in                  source_manager_;
+    CompilerInstance $in                        compiler_;
     map<string, std::vector<std::vector<relation>>> data_;
 $end
 

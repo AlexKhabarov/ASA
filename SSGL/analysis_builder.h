@@ -34,7 +34,7 @@ $interface
                         compiler_.setFileManager     (&tool_.getFiles());
                         compiler_.createSourceManager( tool_.getFiles());
                         compiler_.InitializeSourceManager(FrontendInputFile(options_parser_.getSourcePathList()[0], IK_PreprocessedCXX));
-                        ref(compiler_.getSourceManager());
+                        ref(compiler_);
                        })}
     {}
     

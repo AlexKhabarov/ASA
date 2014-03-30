@@ -761,6 +761,7 @@
 					"$(inherited)",
 					/usr/local/Cellar/llvm/3.4/lib,
 				);
+				LLVM_LTO = NO;
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-D",
@@ -778,6 +779,7 @@
 		CCE4A2CA18D5F999006B9072 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_OPTIMIZATION_LEVEL = s;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -787,6 +789,7 @@
 					"$(inherited)",
 					/usr/local/Cellar/llvm/3.4/lib,
 				);
+				LLVM_LTO = NO;
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-D",

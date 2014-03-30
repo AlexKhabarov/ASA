@@ -9,14 +9,13 @@
 #ifndef SSGL_relations_h
 #define SSGL_relations_h
 
-$sl$analyzer(forStmt, ForStmt,
-    $sl$relation(n->getLocStart(),          n->getLParenLoc())
-    $sl$relation(n->getLParenLoc(),         n->getInit()->getLocStart())
-    $sl$relation(n->getInit()->getLocEnd(), n->getCond()->getLocStart())
-    $sl$relation(n->getCond()->getLocEnd(), n->getInc()->getLocStart())
-    $sl$relation(n->getInc()->getLocEnd() ,  n->getRParenLoc())
-    $sl$relation(n->getRParenLoc(),         n->getBody()->getLocStart())
-    $sl$relation(n->getBody()->getLocEnd(), n->getLocEnd())
+$sl$analyzer(forStmt, ForStmt, Statement,
+    $sl$relation_n(n->getLocStart(),          n->getLParenLoc())
+    $sl$relation_n(n->getLParenLoc(),         n->getInit()->getLocStart())
+    $sl$relation_f(n->getInit()->getLocEnd(), n->getCond()->getLocStart())
+    $sl$relation_f(n->getCond()->getLocEnd(), n->getInc()->getLocStart())
+    $sl$relation_f(n->getInc()->getLocEnd(),  n->getRParenLoc())
+    $sl$relation_n(n->getRParenLoc(),         n->getBody()->getLocStart())
 )
 
 #endif
